@@ -4,10 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style/styl.css">
-    <title>Document</title>
+    <title>Classroom Clone</title>
 </head>
 <body>
-    <h1>Podrobka Classrooma</h1>
-    <p>Ilosc uzytkownikow: {{ ilosc_uzytkownikow }}</p>
+    <header>
+        <h1>Podróbka Classrooma</h1>
+        <p>Łączna liczba użytkowników: {{ ilosc_uzytkownikow }}</p>
+    </header>
+
+    <main>
+        <section class="team-section">
+            <h2>Twoje Zespoły</h2>
+            <ul class="team-list">
+                {% for team in teams %}
+                    <li class="team-item">
+                        <span class="team-name">{{ team.name }}</span>
+                        <span class="team-members">Liczba członków: {{ team.members.count }}</span>
+                    </li>
+                {% endfor %}
+            </ul>
+        </section>
+
+        <section class="add-team-section">
+            <h2>Dodaj Nowy Zespół</h2>
+            <form method="POST" action="{% url 'add_team' %}">
+                {% csrf_token %}
+                <input type="text" name="team_name" placeholder="Nazwa zespołu" required>
+                <button type="submit" class="add-team-button">Dodaj zespół</button>
+            </form>
+        </section>
+    </main>
 </body>
 </html>
