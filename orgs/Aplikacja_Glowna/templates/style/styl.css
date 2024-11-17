@@ -88,3 +88,28 @@ input[type="text"] {
 .add-team-button:hover {
     background-color: #0056b3;
 }
+
+.messages {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+}
+
+.message {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid;
+    border-radius: 5px;
+}
+
+.message.success {
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+    color: #155724;
+}
+
+.message.error {
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    color: #721c24;
+}

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dodaj Nowy Zespół</title>
+    <link rel="stylesheet" href="{% static 'style/styl.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Dodaj Nowy Zespół</h1>
+        <nav>
+            <a href="{% url 'main' %}">Powrót do Strony Głównej</a>
+            <a href="{% url 'logout' %}">Wyloguj się</a>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <form method="POST" action="{% url 'add_team' %}">
+                {% csrf_token %}
+                <div>
+                    <label for="team_name">Nazwa zespołu:</label>
+                    <input type="text" id="team_name" name="team_name" placeholder="Podaj nazwę zespołu" required>
+                </div>
+                <button type="submit">Dodaj Zespół</button>
+            </form>
+        </section>
+    </main>
+</body>
+</html>

@@ -1,36 +1,45 @@
-from django.shortcuts import render
-from .models import Uzytkownik
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import logout
 from django.contrib import messages
-from .models import Team
-from .forms import JoinTeamForm
+from .models import *
+from .forms import *
+
+def custom_logout(request):
+    logout(request)
+    return redirect('main')
+
+def profile_redirect(request):
+    return redirect('orgs/')
 
 def main(request):
-    UZYTKOWNIK = Uzytkownik.objects.count()
-    return render(request, 'index.html', {'ilosc_uzytkownikow': UZYTKOWNIK})
+    if request.user.is_authenticated:
+        teams = Team.objects.filter(members=request.user) | Team.objects.filter(owner=request.user)
+        return render(request, 'index.html', {'teams': teams})
+    else:
+        return redirect('login')
 
 @login_required
 def join_team(request):
     if request.method == 'POST':
         form = JoinTeamForm(request.POST)
         if form.is_valid():
-            code = form.cleaned_data['code']
+            kod = form.cleaned_data['code']
             try:
-                team = Team.objects.get(code=code)
-                team.members.add(request.user)
-                messages.success(request, 'Successfully joined the team!')
-                return redirect('team_detail', team_id=team.id)
+                zespol = Team.objects.get(code=kod)
+                zespol.members.add(request.user)
+                messages.success(request, 'Pomyślnie dołączono do zespołu!')
+                return redirect('team_detail', team_id=zespol.id)
             except Team.DoesNotExist:
-                messages.error(request, 'Team with this code does not exist.')
+                messages.error(request, 'Zespół o podanym kodzie nie istnieje.')
     else:
         form = JoinTeamForm()
     return render(request, 'join_team.html', {'form': form})
 
 @login_required
 def team_detail(request, team_id):
-    team = get_object_or_404(Team, id=team_id)
-    return render(request, 'team_detail.html', {'team': team})
+    zespol = get_object_or_404(Team, id=team_id)
+    return render(request, 'team_detail.html', {'team': zespol})
 
 @login_required
 def add_team(request):
@@ -38,5 +47,9 @@ def add_team(request):
         team_name = request.POST.get('team_name')
         if team_name:
             Team.objects.create(name=team_name, owner=request.user)
-        return redirect('main')  # Powrót na główną stronę
-    return render(request, 'add_team.html')  # Szablon nie jest wymagany, jeśli dodajemy zespoły z tej samej strony
+            messages.success(request, f"Zespół '{team_name}' został pomyślnie dodany!")
+        else:
+            messages.error(request, "Nie udało się dodać zespołu. Spróbuj ponownie.")
+        return redirect('main')  # Powrót na stronę główną
+    return render(request, 'add_team.html')
+

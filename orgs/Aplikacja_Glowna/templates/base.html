@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'style/styl.css' %}">
+    <title>Podróbka Classrooma</title>
+</head>
+<body>
+    {% if user.is_authenticated %}
+        <p>Witaj, {{ user.username }}! <a href="{% url 'logout' %}">Wyloguj się</a></p>
+    {% endif %}
+
+    <header>
+        <h1>Podróbka Classrooma</h1>
+    </header>
+
+    {% block content %}{% endblock %}
+</body>
+</html>
