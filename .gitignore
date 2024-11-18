@@ -2,5 +2,5 @@ venv
 __pycache__
 Aplikacja_Glowna\__pycache__
 Aplikacja_Glowna\migrations\__pycache__
-orgs\orgs\__pycache__
+orgs\__pycache__
 db.sqlite3
