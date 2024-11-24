@@ -15,6 +15,17 @@
         {% else %}
             <p>Nie należysz do żadnego zespołu.</p>
         {% endif %}
+
+
+        <h2>dctfvygbh</h2>
+            <ul>
+                {% for team in teams %}
+                    <li>
+                        <a href="{% url 'team_detail' team.id %}">{{ team.name }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+
     </section>
 
     <section class="add-team-section">

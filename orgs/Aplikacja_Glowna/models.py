@@ -17,7 +17,6 @@ class Uzytkownik(models.Model):
     def __str__(self):
         return f"{self.Imie} {self.Nazwisko}"
 
-
 # Model zespołu
 class Team(models.Model):
     name = models.CharField(max_length=255)
