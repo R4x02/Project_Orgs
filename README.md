@@ -37,7 +37,7 @@ Project_Orgs
 * add_team - zmiany dzięki, którym w końcu mona dodać zespół :D
 
 #### Style:
-* Lekka zabawa css, tylko zeby dojść do wniosku, ze nie dziala (MACIEJU NAPRAW)
+* Lekka zabawa css, tylko zeby dojść do wniosku, ze nie dziala (MACIEJU NAPRAW) (NAPRAWIONE)
 
 
 #### INNE BARDZO WAŻNE RZECZY:
