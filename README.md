@@ -1,4 +1,7 @@
 # Project_Orgs
+** NOWE REPO ** 
+~~ https://github.com/MaciejMocarski/Project_Orgs ~~
+
 Project_Orgs
 
 ### Zmiany 17.11.2024:
