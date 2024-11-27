@@ -8,24 +8,13 @@
             <ul class="team-list">
                 {% for team in teams %}
                     <li class="team-item">
-                        <span class="team-name">{{ team.name }}</span>
+                        <span class="team-name"><a href="{% url 'team_detail' team.id %}">{{ team.name }}</a></span>
                     </li>
                 {% endfor %}
             </ul>
         {% else %}
             <p>Nie należysz do żadnego zespołu.</p>
         {% endif %}
-
-
-        <h2>dctfvygbh</h2>
-            <ul>
-                {% for team in teams %}
-                    <li>
-                        <a href="{% url 'team_detail' team.id %}">{{ team.name }}</a>
-                    </li>
-                {% endfor %}
-            </ul>
-
     </section>
 
     <section class="add-team-section">
