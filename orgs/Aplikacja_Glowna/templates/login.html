@@ -3,14 +3,15 @@
 {% block title %}Logowanie{% endblock %}
 
 {% block content %}
+<main>
 <h1>Zaloguj się</h1>
 <form method="post">
     {% csrf_token %}
-    <div>
+    <div class = "login-uz">
         <label for="username">Nazwa użytkownika:</label>
         <input type="text" id="username" name="username" required>
     </div>
-    <div>
+    <div class = "login-uz">
         <label for="password">Hasło:</label>
         <input type="password" id="password" name="password" required>
     </div>
@@ -19,4 +20,5 @@
 {% if form.errors %}
     <p style="color: red;">Nieprawidłowe dane logowania</p>
 {% endif %}
+</main>
 {% endblock %}
