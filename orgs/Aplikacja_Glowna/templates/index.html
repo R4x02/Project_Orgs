@@ -25,5 +25,18 @@
             <button type="submit" class="add-team-button">Dodaj zespół</button>
         </form>
     </section>
+
+    <section class="delete-team-section">
+        <h2>Usuń istniejący zespół</h2>
+        <form method="POST" action="{% url 'delete_team' %}">
+            {% csrf_token %}
+            <select name="team_name" required>
+                {% for team in teams %}
+                    <option value="{{ team.name }}">{{ team.name }}</option>
+                {% endfor %}
+            </select>
+            <button type="submit" class="delete-team-button">Usuń zespół</button>
+        </form>
+    </section>
 </main>
 {% endblock %}

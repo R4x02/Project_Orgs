@@ -53,3 +53,16 @@ def add_team(request):
         return redirect('main')  # Powrót na stronę główną
     return render(request, 'add_team.html')
 
+@login_required
+def delete_team(request):
+    if request.method == 'POST':
+        team_name = request.POST.get('team_name')
+        try:
+            team = Team.objects.get(name=team_name, owner=request.user)
+            team.delete()
+            messages.success(request, f"Zespół '{team_name}' został usunięty!")
+        except Team.DoesNotExist:
+            messages.error(request, f"Zespół '{team_name}' nie istnieje")
+        return redirect('main')  # Powrót na stronę główną
+    return render(request, 'delete_team.html')
+
