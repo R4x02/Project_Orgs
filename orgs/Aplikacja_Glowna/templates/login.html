@@ -8,12 +8,10 @@
 <form method="post">
     {% csrf_token %}
     <div class = "login-uz">
-        <label for="username">Nazwa użytkownika:</label>
-        <input type="text" id="username" name="username" required>
+        <input type="text" id="username" name="username" placeholder="Nazwa użytkownika" required>
     </div>
     <div class = "login-uz">
-        <label for="password">Hasło:</label>
-        <input type="password" id="password" name="password" required>
+        <input type="password" id="password" name="password" placeholder="Hasło" required>
     </div>
     <button type="submit">Zaloguj</button>
 </form>

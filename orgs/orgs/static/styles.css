@@ -10,7 +10,13 @@ body {
     flex-direction: column;
     align-items: center;
     padding: 20px;
-    background-color: #f5f5f5;
+    background-color: white;
+    color: black;
+}
+
+.dark-mode {
+    background-color: black;
+    color: white;
 }
 
 header {
@@ -33,7 +39,7 @@ p {
 main {
     max-width: 600px;
     width: 100%;
-    background-color: #fff;
+    background-color: white;
     border-radius: 8px;
     padding: 20px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -43,10 +49,16 @@ main p {
     justify-self: center;
 }
 
+main h1 {
+    justify-self: center;
+}
+main h2 {
+    justify-self: center;
+}
 .login-uz {
     display: flex;
-    flex-direction: column;
-    align-items: left;
+    flex-direction: row;
+    margin: 5px;
 }
 
 .team-section, .add-team-section {
@@ -67,7 +79,6 @@ main p {
 
 .team-item {
     display: flex;
-    justify-content: space-between;
     align-items: center;
     padding: 10px;
     border-top: 1px solid #ddd;
@@ -88,7 +99,6 @@ main p {
 .team-name a:hover {
     color:#333;
     margin: 10px;
-    background-color: #f5f5f5;
 }
 
 
@@ -98,6 +108,13 @@ main p {
     color: #333;
 }
 
+form[method="post"] {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
 input[name="team_name"] {
     width: 40%;
     padding: 8px;
@@ -105,7 +122,14 @@ input[name="team_name"] {
     border-radius: 5px;
 }
 
-.add-team-button {
+input[name="username"], input[name="password"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+button[type="submit"] {
     padding: 8px 15px;
     background-color: #007bff;
     color: #fff;
@@ -114,9 +138,10 @@ input[name="team_name"] {
     cursor: pointer;
     transition: 0.3s;
     margin: 5px;
+    width: 33.5%;
 }
 
-.add-team-button:hover {
+button[type="submit"]:hover {
     background-color: #0056b3;
 }
 
