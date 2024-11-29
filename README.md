@@ -1,9 +1,13 @@
 # Project_Orgs
-** NOWE REPO ** 
- 
-~~ https://github.com/MaciejMocarski/Project_Orgs ~~
-
 Project_Orgs
+
+### Zmiany 27.11.2024:
+
+#### Style:
+* Podłączanie trochę zajeło, ale się udało:
+* Naprawiono 404 styles.css
+* Zmiana koloru wyświetlania hyperlinków
+* poprawiono wygląd głównej strony
 
 ### Zmiany 17.11.2024:
 
@@ -29,7 +33,7 @@ Project_Orgs
 
 #### Widoki (•᷄- •᷅ ;): 
 
-* Dojście do wniosku, ze widoki to dzieło szatana
+* Dojście do wniosku, ze widoki to dzieło szatana (SPOKOJNIE NAPRAWIAM)
 * def custom_logout, profile_redirect - widoki które obsługują redirecty dzięki którym Django nie wywala nas na jakieś anomalie tylko od razu na pozadana strone
 * main - aktualizacja widoku w celu obslugi logowania
 * join_team - views w wersji beta, którego przy okazji ugotował chat jak prosiłem go o pomoc z czymś innym pozdro
@@ -37,7 +41,7 @@ Project_Orgs
 * add_team - zmiany dzięki, którym w końcu mona dodać zespół :D
 
 #### Style:
-* Lekka zabawa css, tylko zeby dojść do wniosku, ze nie dziala (MACIEJU NAPRAW) (NAPRAWIONE)
+* Lekka zabawa css, tylko zeby dojść do wniosku, ze nie dziala (MACIEJU NAPRAW) (NAPRAWIONE) (WALE GITHUBA ALE NAPRAWIONE)
 
 
 #### INNE BARDZO WAŻNE RZECZY:
