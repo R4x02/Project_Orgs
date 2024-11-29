@@ -1,5 +1,19 @@
 # Project_Orgs
 Project_Orgs
+### Zmiany 29.11.2024:
+
+#### Views:
+* Dodane funkcje usuwającą drużynę
+* Przy dodawaniu drużyn sprawdza czy już taka nie istnieje
+
+#### Templatki:
+* Zmiana index.html
+* Dodanie delete_team.html
+* W loginie próbuje dodać zmienne z modułu
+
+#### Moduły
+* Próbuje wykorzystać moduły bo jak na razie to leżą i kwiczą
+
 
 ### Zmiany 27.11.2024:
 
