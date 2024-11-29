@@ -12,9 +12,10 @@
     {% if user.is_authenticated %}
         <p>Witaj, {{ user.username }}! <a href="{% url 'logout' %}">Wyloguj się</a></p>
     {% endif %}
-
     <header>
         <h1>Podróbka Classrooma</h1>
+        <button onclick="darkliteFunc()">Toggle dark mode</button>
+
     </header>
 
     {% block content %}{% endblock %}
