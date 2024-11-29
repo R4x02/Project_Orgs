@@ -46,8 +46,11 @@ def add_team(request):
     if request.method == 'POST':
         team_name = request.POST.get('team_name')
         if team_name:
-            Team.objects.create(name=team_name, owner=request.user)
-            messages.success(request, f"Zespół '{team_name}' został pomyślnie dodany!")
+            if Team.objects.filter(name=team_name, owner=request.user).exists():
+                messages.error(request, f"Zespół '{team_name}' już istnieje!")
+            else:
+                Team.objects.create(name=team_name, owner=request.user)
+                messages.success(request, f"Zespół '{team_name}' został pomyślnie dodany!")
         else:
             messages.error(request, "Nie udało się dodać zespołu. Spróbuj ponownie.")
         return redirect('main')  # Powrót na stronę główną
