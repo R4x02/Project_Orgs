@@ -6,6 +6,15 @@ Project_Orgs
 * Po zalogowaniu trzeba podać swoje dane które są zapisywane w models
 * Wykorzystujemy kod danego zespołu, dodalem go w html
 
+#### Style:
+* Ciężkie zmiany css'a
+* Nowy styl dark mode'a
+* Zmieniono kolory czcionek i wielkości przycisków dla dostępności
+* Ogólnie sporo się nauczyłem o wyglądzie
+
+#### settings.py:
+* Poprawiono strefę czasową ('Europe/Warsaw' zamiast 'UTC')
+
 ### Zmiany 29.11.2024:
 
 #### Views:
