@@ -1,6 +1,5 @@
 {% extends "base.html" %}
-
-{% block title %}Logowanie{% endblock %}
+{% load static %}
 
 {% block content %}
     <h1>Zespół - {{ team.name }}</h1>
@@ -17,13 +16,25 @@
             </ul>
         </section>
 
-        <section><br>
+        <section>
             <h2>Kod do dołączenia</h2>
             <h4>{{ team.code }}</h4>
         </section>
-        {{ team.name }}<br>
-        {{ team.owner }}<br>
-        {{ team.member }}<br>
 
+        <hr>
+        <section id="chat-section">
+            <h2>Czat zespołu</h2>
+            <div id="chat-box">
+                {% for message in messages %}
+                <p><strong>{{ message.user.username }}</strong>: {{ message.content }} <em>{{ message.timestamp }}</em></p>
+                {% endfor %}
+            </div>
+
+            <form id="chat-form" data-url="{% url 'send_message' team.id %}" data-csrf="{{ csrf_token }}">
+                <textarea id="message-content" placeholder="Napisz wiadomość..."></textarea>
+                <button type="submit">Wyślij</button>
+            </form>
+        </section>
     </main>
+    <script src="{% static 'chat.js' %}"></script>
 {% endblock %}
