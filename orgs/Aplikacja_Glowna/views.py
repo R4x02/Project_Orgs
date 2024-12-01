@@ -2,6 +2,10 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from django.contrib import messages
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from django.utils.timezone import now
+from django.core.exceptions import PermissionDenied
 from .models import *
 from .forms import *
 
@@ -35,28 +39,47 @@ def info(request):
     return render(request, 'info.html')
 
 
-@login_required
-def join_team(request):
-    if request.method == 'POST':
-        form = JoinTeamForm(request.POST)
-        if form.is_valid():
-            kod = form.cleaned_data['code']
-            try:
-                zespol = Team.objects.get(code=kod)
-                zespol.members.add(request.user)
-                messages.success(request, 'Pomyślnie dołączono do zespołu!')
-                return redirect('team_detail', team_id=zespol.id)
-            except Team.DoesNotExist:
-                messages.error(request, 'Zespół o podanym kodzie nie istnieje.')
-    else:
-        form = JoinTeamForm()
-    return render(request, 'join_team.html', {'form': form})
+# @login_required
+# def join_team(request):
+#     if request.method == 'POST':
+#         form = JoinTeamForm(request.POST)
+#         if form.is_valid():
+#             kod = form.cleaned_data['code']
+#             try:
+#                 zespol = Team.objects.get(code=kod)
+#                 zespol.members.add(request.user)
+#                 messages.success(request, 'Pomyślnie dołączono do zespołu!')
+#                 return redirect('team_detail', team_id=zespol.id)-
+#             except Team.DoesNotExist:
+#                 messages.error(request, 'Zespół o podanym kodzie nie istnieje.')
+#     else:
+#         form = JoinTeamForm()
+#     return render(request, 'join_team.html', {'form': form})
 
 @login_required
+def join_team (request):
+    if request.method == 'POST':
+        code = request.POST.get('code')
+        try:
+            druzyna = Team.objects.get(code=code)
+            druzyna.members.add(request.user)
+            messages.success(request, f"Dołączyłeś do zespołu: {druzyna.name}")
+            return redirect('team_detail', team_id=druzyna.id)  # Przekierowanie na szczegóły drużyny
+        except Team.DoesNotExist:
+            messages.error(request, "Zespół o podanym kodzie nie istnieje.")
+            return redirect('index.html')
+
+    return render(request, 'team_detail.html')
+
+
 def team_detail(request, team_id):
-    zespol = get_object_or_404(Team, id=team_id)
-    code = Team.code
-    return render(request, 'team_detail.html', {'team': zespol, "kod zespołu":code})
+    team = get_object_or_404(Team, id=team_id)
+    messages = team.messages.all().order_by('timestamp')
+
+    return render(request, 'team_detail.html', {
+        'team': team,
+        'messages': messages,
+    })
 
 @login_required
 def add_team(request):
@@ -86,3 +109,26 @@ def delete_team(request):
         return redirect('main')  # Powrót na stronę główną
     return render(request, 'delete_team.html')
 
+@login_required
+def team_chat(request, team_id):
+    team = get_object_or_404(Team, id=team_id)
+    if request.user not in team.members.all() and request.user != team.owner:
+        raise PermissionDenied("Nie masz dostępu do tego czatu.")
+
+    messages = team.messages.order_by('timestamp')
+    return render(request, 'team_chat.html', {'team': team, 'messages': messages})
+
+@csrf_exempt
+@login_required
+def send_message(request, team_id):
+    if request.method == 'POST':
+        team = get_object_or_404(Team, id=team_id)
+        if request.user not in team.members.all() and request.user != team.owner:
+            return JsonResponse({'error': 'Brak dostępu.'}, status=403)
+
+        content = request.POST.get('content')
+        if content:
+            message = ChatMessage.objects.create(team=team, user=request.user, content=content)
+            return JsonResponse({'user': message.user.username, 'content': message.content, 'timestamp': message.timestamp.strftime('%Y-%m-%d %H:%M:%S')})
+        return JsonResponse({'error': 'Treść wiadomości jest wymagana.'}, status=400)
+    return JsonResponse({'error': 'Nieobsługiwana metoda.'}, status=405)
