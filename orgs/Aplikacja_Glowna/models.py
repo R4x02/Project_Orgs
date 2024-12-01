@@ -3,11 +3,6 @@ from django.contrib.auth.models import User
 import random
 import string
 
-# Funkcja generująca unikalny kod zespołu
-def generate_team_code():
-    return ''.join(random.choices(string.ascii_uppercase + string.digits, k=6))
-
-
 # Model użytkownika
 class Uzytkownik(models.Model):
     Imie = models.CharField(max_length=100)
@@ -16,6 +11,10 @@ class Uzytkownik(models.Model):
 
     def __str__(self):
         return f"{self.Imie} {self.Nazwisko}"
+
+# Funkcja generująca unikalny kod zespołu
+def generate_team_code():
+    return ''.join(random.choices(string.ascii_uppercase + string.digits, k=6))
 
 # Model zespołu
 class Team(models.Model):

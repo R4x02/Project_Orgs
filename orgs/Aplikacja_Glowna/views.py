@@ -19,6 +19,7 @@ def main(request):
     else:
         return redirect('login')
 
+@login_required
 def info(request):
     if request.method == 'POST':
         name = request.POST.get('Imie')
@@ -54,7 +55,8 @@ def join_team(request):
 @login_required
 def team_detail(request, team_id):
     zespol = get_object_or_404(Team, id=team_id)
-    return render(request, 'team_detail.html', {'team': zespol})
+    code = Team.code
+    return render(request, 'team_detail.html', {'team': zespol, "kod zespołu":code})
 
 @login_required
 def add_team(request):
