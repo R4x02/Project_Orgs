@@ -1,5 +1,11 @@
 # Project_Orgs
 Project_Orgs
+### Zmiany 30.11.2024 i  01.12.2024:
+
+#### Views:
+* Po zalogowaniu trzeba podać swoje dane które są zapisywane w models
+* Wykorzystujemy kod danego zespołu, dodalem go w html
+
 ### Zmiany 29.11.2024:
 
 #### Views:
