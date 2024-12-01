@@ -1,22 +1,5 @@
-function darkliteFunc() {
-    const body = document.body;
-    body.classList.toggle('dark-mode');
-
-    if (body.classList.contains('dark-mode')) {
-        localStorage.setItem('theme', 'dark');
-    } else {
-        localStorage.setItem('theme', 'light');
-    }
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-    const theme = localStorage.getItem('theme');
-    if (theme === 'dark') {
-        document.body.classList.add('dark-mode');
-    }
-});
-
-const teamLinks = document.querySelectorAll('.team-name a');
+document.addEventListener('DOMContentLoaded', function() {
+    const teamLinks = document.querySelectorAll('.team-name a');
 
 teamLinks.forEach(link => {
     link.addEventListener('mouseover', function() {
@@ -33,4 +16,5 @@ teamLinks.forEach(link => {
         this.closest('.team-item button').style.backgroundColor = '';
         this.closest('.team-name a').style.color = '';
     });
+});
 });
