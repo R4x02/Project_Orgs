@@ -9,11 +9,15 @@
     <main>
         <section>
             <h2>Członkowie zespołu</h2>
-            <ul>
-                {% for member in team.members.all %}
-                <li>{{ member.username }}</li>
-                {% endfor %}
-            </ul>
+            {% if team.members.all %}
+                <ul>
+                    {% for member in team.members.all %}
+                    <li>{{ member.username }}</li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>Brak członków zespołu</p>
+            {% endif %}
         </section>
 
         <section>
@@ -26,7 +30,7 @@
             <h2>Czat zespołu</h2>
             <div id="chat-box">
                 {% for message in messages %}
-                <p><strong>{{ message.user.username }}</strong>: {{ message.content }} <em>{{ message.timestamp }}</em></p>
+                <p><strong>{{ message.user.username }}:</strong> {{ message.content }} <em>{{ message.timestamp }}</em></p>
                 {% endfor %}
             </div>
 

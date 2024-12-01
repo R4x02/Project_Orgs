@@ -8,6 +8,7 @@
 a {
     text-decoration: none;
     color: #007bff;
+    transition: color 0.2s;
 }
 
 body {
@@ -17,6 +18,7 @@ body {
     padding: 20px;
     background-color: white;
     color: black;
+    transition: background-color 0.2s, color 0.2s;
 }
 
 header {
@@ -27,11 +29,17 @@ header {
 h1 {
     color: #333;
     font-size: 2rem;
+    transition: color 0.2s;
 }
 
 p {
     font-size: 1.2rem;
-    color: #666;
+    transition: color 0.2s;
+}
+
+.dark-mode main p {
+    color: #d17070;
+    transition: color 0.2s;
 }
 
 main {
@@ -41,24 +49,46 @@ main {
     border-radius: 8px;
     padding: 20px;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    transition: background-color 0.2s, color 0.2s;
 }
 
-main p {
-    justify-self: center;
-}
-
-main h1 {
-    justify-self: center;
-}
-
-main h2 {
+main p, h1, h2, h3, h4, h5, h6 {
     justify-self: center;
     color: #333;
+    text-shadow: 0px 0px 0px #000;
+    transition: color 0.2s, text-shadow 0.2s;
 }
 
-main h4 {
-    justify-self: center;
-    color: #333;
+#message-content {
+    width: 80%;
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#chat-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#chat-box p {
+    color: #3a3431;
+}
+
+#chat-box em {
+    color: #888;
+    font-size: 0.7rem;
+}
+
+#chat-box strong {
+    color: #007bff;
+}
+
+.dark-mode #chat-box p {
+    color: #e0c097;
+    transition: color 0.2s;
 }
 
 .login-uz {
@@ -75,6 +105,7 @@ main h4 {
     margin-bottom: 10px;
     font-size: 1.5rem;
     justify-self: center;
+    transition: color 0.2s;
 }
 
 .team-list {
@@ -100,7 +131,7 @@ main h4 {
     width: 100%;
     height: 100%;
     color: #007bff;
-    transition: 0.2s;
+    transition: color 0.2s;
     font-weight: bold;
 }
 
@@ -109,21 +140,23 @@ main h4 {
 }
 
 .team-item button:hover {
-    background-color: #f9f9f9;
+    background-color: #ffffff;
 }
 
 .team-members {
     font-size: 0.9rem;
     color: #888;
+    transition: color 0.2s;
 }
 
 .add-team-section h2 {
     margin-bottom: 10px;
     font-size: 1.5rem;
     color: #333;
+    transition: color 0.2s;
 }
 
-form[method="post"] {
+form[method="POST"] {
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -151,7 +184,7 @@ button[type="submit"] {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: 0.3s;
+    transition: background-color 0.2s, color 0.2s;
     margin: 5px;
     width: 33.5%;
 }
@@ -177,38 +210,69 @@ button[type="submit"]:hover {
     background-color: #d4edda;
     border-color: #c3e6cb;
     color: #155724;
+    transition: background-color 0.2s, color 0.2s;
 }
 
 .message.error {
     background-color: #f8d7da;
     border-color: #f5c6cb;
     color: #721c24;
+    transition: background-color 0.2s, color 0.2s;
 }
 
-
-/* DARKMODE SETTIGNS - DO NOT TOUCH! */
-
+/* DARKMODE SETTINGS - DO NOT TOUCH! */
 
 .dark-mode {
     background-color: #292929;
     color: white;
+    transition: background-color 0.2s, color 0.2s;
 }
 
 .dark-mode main {
     background-color: #3a3a3a;
     color: white;
+    transition: background-color 0.2s, color 0.2s;
 }
 
 .dark-mode button {
     background-color: #b36336;
     color: white;
-    border-top: 1px #141414;
+    transition: background-color 0.2s, color 0.2s;
 }
 
 .dark-mode a {
-    color: #007bff;
+    color: #c4a467;
+    transition: color 0.2s;
 }
 
-.dark-mode h1, p {
-    color: #f0f0f0;
+.dark-mode main a {
+    color: #a74619;
+    text-shadow: 1px 1px 1px #000;
+    border-top: 5px #1a1a1a;
+    background-color: #3a3a3a;
+    transition: color 0.2s, text-shadow 0.2s, background-color 0.2s;
+}
+
+body.dark-mode h1, body.dark-mode h2, body.dark-mode h3, body.dark-mode h5, body.dark-mode h6 {
+    color: #a74619;
+    text-shadow: 2px 2px 3px #1a1a1a;
+    transition: color 0.2s, text-shadow 0.2s;
+}
+
+body.dark-mode h4 {
+    color: #caa28f;
+    text-shadow: 2px 2px 3px #1a1a1a;
+    transition: color 0.2s, text-shadow 0.2s;
+}
+
+#dark-mode-toggle {
+    border: 1px solid #595972;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.dark-mode #dark-mode-toggle {
+    background-color: #595972;
+    color: white;
+    transition: background-color 0.2s, color 0.2s;
 }
