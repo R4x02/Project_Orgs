@@ -12,4 +12,5 @@ urlpatterns = [
     path('add-team/', views.add_team, name='add_team'),
     path('delete-team/', views.delete_team, name='delete_team'),
     path('accounts/profile/', views.profile_redirect, name='profile_redirect'),
+    path('team/<int:team_id>/send-message/', views.send_message, name='send_message'),
 ]
