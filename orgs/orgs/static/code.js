@@ -1,25 +1,38 @@
+function darkliteFunc() {
+    const body = document.body;
+    body.classList.toggle('dark-mode');
+
+    if (body.classList.contains('dark-mode')) {
+        localStorage.setItem('theme', 'dark');
+    } else {
+        localStorage.setItem('theme', 'light');
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const theme = localStorage.getItem('theme');
+    if (theme === 'dark') {
+        document.body.classList.add('dark-mode');
+    }
+});
+
 document.addEventListener('DOMContentLoaded', function() {
     const teamLinks = document.querySelectorAll('.team-name a');
 
     teamLinks.forEach(link => {
         link.addEventListener('mouseover', function() {
-            this.closest('.team-item').style.backgroundColor = '#f5f5f5';
+            const theme = localStorage.getItem('theme');
+            if (theme === 'dark') {
+                this.closest('.team-item button').style.backgroundColor = '#303030';
+                this.closest('.team-name a').style.color = '#fff';
+            } else {
+                this.closest('.team-item button').style.backgroundColor = '#d3d3d3';
+                this.closest('.team-name a').style.color = '#000';
+            }
         });
-
         link.addEventListener('mouseout', function() {
-            this.closest('.team-item').style.backgroundColor = '';
+            this.closest('.team-item button').style.backgroundColor = '';
+            this.closest('.team-name a').style.color = '';
         });
     });
 });
-
-function darkliteFunc() {
-    document.querySelectorAll('*:not(item-name)').forEach(element => {
-        element.classList.toggle('dark-mode');
-    });
-
-    if (document.querySelector('body').classList.contains('dark-mode')) {
-        localStorage.setItem('darkMode', 'enabled');
-    } else {
-        localStorage.removeItem('darkMode');
-    }
-}

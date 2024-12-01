@@ -8,7 +8,7 @@
             <ul class="team-list">
                 {% for team in teams %}
                     <li class="team-item">
-                        <span class="team-name"><a href="{% url 'team_detail' team.id %}">{{ team.name }}</a></span>
+                        <button class="team-name"><a href="{% url 'team_detail' team.id %}">{{ team.name }}</a></button>
                     </li>
                 {% endfor %}
             </ul>
