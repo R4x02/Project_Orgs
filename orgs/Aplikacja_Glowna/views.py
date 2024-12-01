@@ -35,28 +35,42 @@ def info(request):
     return render(request, 'info.html')
 
 
+# @login_required
+# def join_team(request):
+#     if request.method == 'POST':
+#         form = JoinTeamForm(request.POST)
+#         if form.is_valid():
+#             kod = form.cleaned_data['code']
+#             try:
+#                 zespol = Team.objects.get(code=kod)
+#                 zespol.members.add(request.user)
+#                 messages.success(request, 'Pomyślnie dołączono do zespołu!')
+#                 return redirect('team_detail', team_id=zespol.id)-
+#             except Team.DoesNotExist:
+#                 messages.error(request, 'Zespół o podanym kodzie nie istnieje.')
+#     else:
+#         form = JoinTeamForm()
+#     return render(request, 'join_team.html', {'form': form})
+
 @login_required
-def join_team(request):
+def join_team (request):
     if request.method == 'POST':
-        form = JoinTeamForm(request.POST)
-        if form.is_valid():
-            kod = form.cleaned_data['code']
-            try:
-                zespol = Team.objects.get(code=kod)
-                zespol.members.add(request.user)
-                messages.success(request, 'Pomyślnie dołączono do zespołu!')
-                return redirect('team_detail', team_id=zespol.id)
-            except Team.DoesNotExist:
-                messages.error(request, 'Zespół o podanym kodzie nie istnieje.')
-    else:
-        form = JoinTeamForm()
-    return render(request, 'join_team.html', {'form': form})
+        code = request.POST.get('code')
+        try:
+            druzyna = Team.objects.get(code=code)
+            druzyna.members.add(request.user)
+            messages.success(request, f"Dołączyłeś do zespołu: {druzyna.name}")
+            return redirect('team_detail', team_id=druzyna.id)  # Przekierowanie na szczegóły drużyny
+        except Team.DoesNotExist:
+            messages.error(request, "Zespół o podanym kodzie nie istnieje.")
+            return redirect('index.html')
+
+    return render(request, 'team_detail.html')
 
 @login_required
 def team_detail(request, team_id):
     zespol = get_object_or_404(Team, id=team_id)
-    code = Team.code
-    return render(request, 'team_detail.html', {'team': zespol, "kod zespołu":code})
+    return render(request, 'team_detail.html', {'team': zespol})
 
 @login_required
 def add_team(request):

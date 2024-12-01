@@ -37,6 +37,16 @@
             </select>
             <button type="submit" class="delete-team-button">Usuń zespół</button>
         </form>
+    </section><br>
+
+    <section class="join-team-section">
+        <h2>Dołącz do Zespołu wpisując kod</h2>
+        <form method="POST" action="{% url 'join_team' %}">
+            {% csrf_token %}
+            <input type="text" name="code" placeholder="......" required>
+            <button type="submit" class="delete-team-button">Dołącz</button>
+        </form>
     </section>
+
 </main>
 {% endblock %}
