@@ -40,7 +40,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'orgs.urls'
 LOGIN_URL = '/login/'  # Ustawić url logowania
-LOGIN_REDIRECT_URL = '/orgs/'  # Po zalogowaniu, użytkownik zostanie przekierowany tutaj
+LOGIN_REDIRECT_URL = '/orgs/info/'  # Po zalogowaniu, użytkownik zostanie przekierowany tutaj
 
 
 TEMPLATES = [

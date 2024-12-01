@@ -19,6 +19,21 @@ def main(request):
     else:
         return redirect('login')
 
+def info(request):
+    if request.method == 'POST':
+        name = request.POST.get('Imie')
+        lastname = request.POST.get('Nazwisko')
+        email = request.POST.get('Gmail')
+
+        if name and lastname and email:
+            uzytkownik = Uzytkownik.objects.create(Imie=name, Nazwisko=lastname, gmail=email)
+            return redirect('main')
+        else:
+            messages.error(request, 'Wszystkie pola są wymagane!')
+
+    return render(request, 'info.html')
+
+
 @login_required
 def join_team(request):
     if request.method == 'POST':
