@@ -7,17 +7,23 @@
 <h1>Zaloguj się</h1>
 <form method="post">
     {% csrf_token %}
-    <div class = "login-uz">
+    <div class="login-uz">
         <input type="text" id="username" name="username" placeholder="Nazwa użytkownika" required>
     </div>
-    <div class = "login-uz">
+    <div class="login-uz">
         <input type="password" id="password" name="password" placeholder="Hasło" required>
     </div>
 
     <button type="submit">Zaloguj</button>
 </form>
-{% if form.errors %}
-    <p style="color: red;">Nieprawidłowe dane logowania</p>
+<p>Nie masz konta? <a href="{% url 'register' %}">Zarejestruj się</a></p>
+{% if messages %}
+    <ul>
+        {% for message in messages %}
+            <li {% if message.tags %}class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
 {% endif %}
 </main>
+
 {% endblock %}

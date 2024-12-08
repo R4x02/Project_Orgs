@@ -4,7 +4,7 @@ from django.contrib.auth import logout
 from django.contrib import messages
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-from django.utils.timezone import now
+from django.utils import timezone
 from django.core.exceptions import PermissionDenied
 from .models import *
 from .forms import *
@@ -25,36 +25,28 @@ def main(request):
 
 @login_required
 def info(request):
+    # Sprawdzenie, czy użytkownik już wypełnił dane
+    if Uzytkownik.objects.filter(id=request.user.id).exists():
+        return redirect('main')  # Przekierowanie na stronę główną, jeśli dane już istnieją
+
     if request.method == 'POST':
         name = request.POST.get('Imie')
         lastname = request.POST.get('Nazwisko')
         email = request.POST.get('Gmail')
 
         if name and lastname and email:
-            uzytkownik = Uzytkownik.objects.create(Imie=name, Nazwisko=lastname, gmail=email)
+            # Tworzenie rekordu użytkownika
+            Uzytkownik.objects.create(
+                Imie=name,
+                Nazwisko=lastname,
+                gmail=email
+            )
+            messages.success(request, "Twoje dane zostały zapisane.")
             return redirect('main')
         else:
             messages.error(request, 'Wszystkie pola są wymagane!')
 
     return render(request, 'info.html')
-
-
-# @login_required
-# def join_team(request):
-#     if request.method == 'POST':
-#         form = JoinTeamForm(request.POST)
-#         if form.is_valid():
-#             kod = form.cleaned_data['code']
-#             try:
-#                 zespol = Team.objects.get(code=kod)
-#                 zespol.members.add(request.user)
-#                 messages.success(request, 'Pomyślnie dołączono do zespołu!')
-#                 return redirect('team_detail', team_id=zespol.id)-
-#             except Team.DoesNotExist:
-#                 messages.error(request, 'Zespół o podanym kodzie nie istnieje.')
-#     else:
-#         form = JoinTeamForm()
-#     return render(request, 'join_team.html', {'form': form})
 
 @login_required
 def join_team (request):
@@ -118,6 +110,7 @@ def team_chat(request, team_id):
     messages = team.messages.order_by('timestamp')
     return render(request, 'team_chat.html', {'team': team, 'messages': messages})
 
+
 @csrf_exempt
 @login_required
 def send_message(request, team_id):
@@ -129,6 +122,22 @@ def send_message(request, team_id):
         content = request.POST.get('content')
         if content:
             message = ChatMessage.objects.create(team=team, user=request.user, content=content)
-            return JsonResponse({'user': message.user.username, 'content': message.content, 'timestamp': message.timestamp.strftime('%Y-%m-%d %H:%M:%S')})
+
+            # Konwertowanie timestamp do lokalnej strefy czasowej
+            local_timestamp = timezone.localtime(message.timestamp)
+            return JsonResponse({'user': message.user.username, 'content': message.content,
+                                 'timestamp': local_timestamp.strftime('%Y-%m-%d %H:%M:%S')})
         return JsonResponse({'error': 'Treść wiadomości jest wymagana.'}, status=400)
     return JsonResponse({'error': 'Nieobsługiwana metoda.'}, status=405)
+
+
+def register(request):
+    if request.method == "POST":
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('login')
+    else:
+        form = RegisterForm()
+
+    return render(request, 'register.html', {'form': form})
