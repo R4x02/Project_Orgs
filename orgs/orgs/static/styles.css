@@ -235,9 +235,13 @@ button[type="submit"]:hover {
 }
 
 .dark-mode button {
-    background-color: #b36336;
-    color: white;
+    background-color: #e0c99d;
+    color: rgb(34, 34, 34);
     transition: background-color 0.2s, color 0.2s;
+}
+
+.dark-mode button:hover {
+    background-color: #b19568;
 }
 
 .dark-mode a {
@@ -246,7 +250,7 @@ button[type="submit"]:hover {
 }
 
 .dark-mode main a {
-    color: #a74619;
+    color: #e0c99d;
     text-shadow: 1px 1px 1px #000;
     border-top: 5px #1a1a1a;
     background-color: #3a3a3a;
@@ -254,7 +258,7 @@ button[type="submit"]:hover {
 }
 
 body.dark-mode h1, body.dark-mode h2, body.dark-mode h3, body.dark-mode h5, body.dark-mode h6 {
-    color: #a74619;
+    color: #e0c99d;
     text-shadow: 2px 2px 3px #1a1a1a;
     transition: color 0.2s, text-shadow 0.2s;
 }
